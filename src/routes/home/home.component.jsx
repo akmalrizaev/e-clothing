@@ -1,8 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import Directory from '../../components/directory/directory.component';
 
-import Home from './routes/home/home.component';
-
-const App = () => {
+const Home = () => {
   const categories = [
     {
       id: 1,
@@ -30,11 +28,7 @@ const App = () => {
       imageUrl: 'https://i.ibb.co/Lx0QNQk/mens.jpg',
     },
   ];
-  return (
-    <Routes>
-      <Route path="/home" element={<Home />} />
-    </Routes>
-  );
+  return <Directory categories={categories} />;
 };
 
-export default App;
+export default Home;
