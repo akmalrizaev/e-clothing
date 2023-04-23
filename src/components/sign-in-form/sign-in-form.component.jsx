@@ -11,6 +11,7 @@ import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
 import './sign-in-form.styles.scss';
+import { toBePartiallyChecked } from '@testing-library/jest-dom/dist/matchers';
 
 const defaultFormFields = {
   email: '',
@@ -38,8 +39,21 @@ const SignInForm = () => {
         email,
         password
       );
+
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/wrong-password':
+          alert('incorrect password for email');
+          break;
+
+        case 'auth/user-not-found':
+          alert('no user assosiated with this email');
+          break;
+        default:
+          console.log(error);
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -72,7 +86,7 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button buttonType="google" onClick={singnInWithGoogle} type="submit">
+          <Button buttonType="google" onClick={singnInWithGoogle} type="button">
             Google Sign In
           </Button>
         </div>
